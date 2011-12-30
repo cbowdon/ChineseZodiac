@@ -12,10 +12,11 @@ All
 	<% foreach (var n in Model.Animals) { %>
 	<li><%= Html.Encode (n.Name) %> 
 		[<%= Html.ActionLink("Details", "Details", new {name = n.Name, position = n.Position, year = n.Year}) %>] 
-		[<%= Html.ActionLink("Delete", "Delete", new {name = n.Name}) %>]</li>
+		[<%= Html.ActionLink("Edit", "Edit", new {id = n.Id}) %>] 
+		[<%= Html.ActionLink("Delete", "Delete", new {aid = n.Id}) %>]</li>
 	<% } %>
 </ul>
 
-There <%= Model.Names.Count == 1? "is only 1 animal" : "are only "+Model.Animals.Count+" animals" %>. 
+There <%= Model.Names.Count == 1? "is 1 animal" : "are  "+Model.Animals.Count+" animals" %>. 
 	
 </asp:Content>

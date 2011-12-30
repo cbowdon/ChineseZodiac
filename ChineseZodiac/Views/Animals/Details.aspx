@@ -12,6 +12,7 @@ Details: <%= Html.Encode(Model.Name) %>
 <ul>
 	<li> Position: <%= Html.Encode(Model.Position) %> </li>
 	<li> Year: <%= Html.Encode(Model.Year) %> </li>		
+	<li> Id: <%= Html.Encode(Model.Id) %> </li>
 </ul>	
 
 

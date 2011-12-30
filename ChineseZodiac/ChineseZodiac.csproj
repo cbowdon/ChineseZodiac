@@ -72,6 +72,7 @@
     <Content Include="Views\Animals\All.aspx" />
     <Content Include="Views\Animals\Details.aspx" />
     <Content Include="Views\Animals\Create.aspx" />
+    <Content Include="Views\Animals\Edit.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

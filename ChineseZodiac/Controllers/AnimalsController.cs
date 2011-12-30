@@ -79,29 +79,66 @@ namespace ChineseZodiac
 			if (animal.Year.GetType () != typeof(int)) {
 				ModelState.AddModelError ("Year", "The year should be an integer.");
 			}
-			
-			
+						
 			if (ModelState.IsValid) {
 				// call some command on the database
 				var db = new ChiZodiacDb ("chinesezodiac.db");
 				db.Add (animal);
 				// show some kind of confirmation
-				return RedirectToAction ("Details", "Animals", new { name = animal.Name });
+				return RedirectToAction ("Details", "Animals", new { name = animal.Name, position = animal.Position, year = animal.Year });
 			} else {
 				return View (animal);	
 			}			
 		}
 		
 		[AcceptVerbs(HttpVerbs.Get)]
-		public ActionResult Delete (string name)
+		public ActionResult Delete (int aid)
 		{
 			// it would be polite and sensible to have a confirmation page first
 			var db = new ChiZodiacDb ("chinesezodiac.db");
-			var animals = from a in db.Animals where a.Name.ToLower () == name.ToLower () select a;
+			var animals = from a in db.Animals where a.Id == aid select a;
 			foreach (var a in animals) {
 				db.Delete (a);
 			}
 			return Redirect ("All");
+		}
+		
+		[AcceptVerbs(HttpVerbs.Get)]
+		public ActionResult Edit (int id)
+		{
+			var db = new ChiZodiacDb ("chinesezodiac.db");
+			var an = (from a in db.Animals where a.Id == id select a).Single ();
+			// didn't check for failure... DANGER!
+			return View (an);
+		}
+		
+		[AcceptVerbs(HttpVerbs.Post)]
+		public ActionResult Edit (CZAnimal animal)
+		{
+			/// Here we validate.
+			if (animal.Name.Trim ().Length == 0
+			    // should also check that it's not a duplicate
+			    ) {
+				ModelState.AddModelError ("Name", "Please add a name!");
+			}
+			if (animal.Position.GetType () != typeof(int) ||
+			// should add a check for position-too-high here
+			    animal.Position < 1) {
+				ModelState.AddModelError ("Position", "The position should be a positive integer.");
+			}
+			if (animal.Year.GetType () != typeof(int)) {
+				ModelState.AddModelError ("Year", "The year should be an integer.");
+			}
+						
+			if (ModelState.IsValid) {
+				// call some command on the database
+				var db = new ChiZodiacDb ("chinesezodiac.db");
+				db.Update (animal);
+				// show some kind of confirmation
+				return RedirectToAction ("Details", "Animals", new { name = animal.Name, position = animal.Position, year = animal.Year });
+			} else {
+				return View (animal);	
+			}					
 		}
 		
 	}

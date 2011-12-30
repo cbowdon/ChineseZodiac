@@ -49,7 +49,8 @@ namespace ChineseZodiac
 			var s = new SqliteCommand ();
 			
 			/// to prevent an injection attack, we parameterize with @name/etc
-			s.CommandText = "INSERT INTO animals (name, position, year) VALUES (@name, @position, @year)";			
+			s.CommandText = "INSERT INTO animals (id, name, position, year) VALUES (@id, @name, @position, @year)";
+			s.Parameters.AddWithValue ("@id", (new Random()).Next());
 			s.Parameters.AddWithValue ("@name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase (animal.Name));
 			s.Parameters.AddWithValue ("@position", animal.Position);
 			s.Parameters.AddWithValue ("@year", animal.Year);
@@ -69,8 +70,23 @@ namespace ChineseZodiac
 		public void Delete (CZAnimal animal)
 		{
 			var s = new SqliteCommand ();
-			s.CommandText = "DELETE FROM animals WHERE name = @name AND position = @position AND year = @year";
-			s.Parameters.AddWithValue ("@name", animal.Name);
+			s.CommandText = "DELETE FROM animals WHERE id = @id";
+			
+			s.Parameters.AddWithValue ("@id", animal.Id);
+			
+			s.Connection = conn;
+			conn.Open ();
+			s.ExecuteNonQuery ();
+			s.Dispose ();
+			conn.Close ();			
+		}
+		
+		public void Update (CZAnimal animal)
+		{
+			var s = new SqliteCommand ();
+			s.CommandText = "UPDATE animals SET name = @name, position = @position, year = @year WHERE id = @id";
+			s.Parameters.AddWithValue ("@id", animal.Id);
+			s.Parameters.AddWithValue ("@name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase (animal.Name));
 			s.Parameters.AddWithValue ("@position", animal.Position);
 			s.Parameters.AddWithValue ("@year", animal.Year);
 			
@@ -128,6 +144,9 @@ namespace ChineseZodiac
 	[Table(Name="main.animals")]
 	public class CZAnimal
 	{
+		[Column(Storage="Id", Name="id", DbType="int", AutoSync=AutoSync.Never)]
+		public int Id { get; set; }
+		
 		[Column(Storage="Name", Name="name", DbType="varchar(10)", AutoSync=AutoSync.Never)]
 		public string Name { get; set; }
 		

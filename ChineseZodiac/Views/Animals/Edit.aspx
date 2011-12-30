@@ -1,23 +1,19 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<ChineseZodiac.CZAnimal>" MasterPageFile="~/Site.master" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<ChineseZodiac.CZAnimal>" MasterPageFile="~/Site.master" %>
 
-<asp:Content id="CreateTitle" ContentPlaceHolderID="TitleContent" runat="server">
-Create an animal
+<asp:Content ContentPlaceHolderID="TitleContent" ID="EditTitle" runat="server">
+Edit an animal	
 </asp:Content>
-
-<asp:Content id="CreateText" ContentPlaceHolderID="MainContent" runat="server">
-
-<h3>Create an animal</h3>
+<asp:Content ContentPlaceHolderID="MainContent" ID="EditMain" runat="server">
+<h3>Edit an animal</h3>
 
 <%= Html.ValidationSummary ("There are some errors in your input! Please correct them and try again.") %>
 <br/>	
 	
 <% using (Html.BeginForm()) { %>
-
-	<%= Html.Hidden ("Id", 0) %>	
 	
 	<label for="Name">Name:</label>
 	<br/>
-	<%= Html.TextBox ("Name") %>
+	<%= Html.TextBox ("Name") %>	
 	<%= Html.ValidationMessage("Name", "*") %>
 	<br/><br/>
 	<label for="Position">Position:</label>
@@ -29,9 +25,10 @@ Create an animal
 	<br/>
 	<%= Html.TextBox ("Year") %>
 	<%= Html.ValidationMessage("Year", "*") %>
-	<br/><br/>
-	<input type="submit" value="Create" />
 	
+	<br/><br/>	
+	<input type="submit" value="Edit" />
 <% } %>	
-
 </asp:Content>
+
+
