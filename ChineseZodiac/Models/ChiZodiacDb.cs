@@ -50,6 +50,7 @@ namespace ChineseZodiac
 			
 			/// to prevent an injection attack, we parameterize with @name/etc
 			s.CommandText = "INSERT INTO animals (id, name, position, year) VALUES (@id, @name, @position, @year)";
+			// this is a disastrous way to create Ids, but I'm taking a shortcut
 			s.Parameters.AddWithValue ("@id", (new Random()).Next());
 			s.Parameters.AddWithValue ("@name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase (animal.Name));
 			s.Parameters.AddWithValue ("@position", animal.Position);
