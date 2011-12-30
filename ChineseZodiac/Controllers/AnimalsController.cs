@@ -32,13 +32,17 @@ namespace ChineseZodiac
 		/// Name.
 		/// </param>
 		[AcceptVerbs(HttpVerbs.Get)]
-		public ActionResult Details (string name)
+		public ActionResult Details (string name, int position, int year)
 		{
 			name = name.ToLower ();
 			// get db
 			var db = new ChiZodiacDb ("chinesezodiac.db");
 			// find animal in db
-			var an = (from a in db.Animals where a.Name.ToLower () == name select a).Single ();
+			var an = (from a in db.Animals 
+			          where a.Name.ToLower () == name 
+			          && a.Position == position
+			          && a.Year == year
+			          select a).Single ();
 			// didn't check for failure... DANGER!
 			return View (an);
 		}
@@ -47,7 +51,7 @@ namespace ChineseZodiac
 		/// The page with the empty form for adding an animal
 		/// </summary>
 		[AcceptVerbs(HttpVerbs.Get)]
-		public ActionResult Add ()
+		public ActionResult Create ()
 		{
 			return View ();
 		}
@@ -59,31 +63,45 @@ namespace ChineseZodiac
 		/// Animal.
 		/// </param>
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Add (CZAnimal animal)
+		public ActionResult Create (CZAnimal animal)
 		{
 			/// Here we validate.
-			if (animal.Name.Trim().Length == 0) {
-				ModelState.AddModelError("Name", "Please add a name!");
+			if (animal.Name.Trim ().Length == 0
+			    // should also check that it's not a duplicate
+			    ) {
+				ModelState.AddModelError ("Name", "Please add a name!");
 			}
-			if (animal.Position.GetType() != typeof(int) ||
-			    // should add a check for position-too-high here
+			if (animal.Position.GetType () != typeof(int) ||
+			// should add a check for position-too-high here
 			    animal.Position < 1) {
 				ModelState.AddModelError ("Position", "The position should be a positive integer.");
 			}
-			if (animal.Year.GetType() != typeof(int)) {
+			if (animal.Year.GetType () != typeof(int)) {
 				ModelState.AddModelError ("Year", "The year should be an integer.");
 			}
 			
 			
 			if (ModelState.IsValid) {
 				// call some command on the database
-				var db = new ChiZodiacDb("chinesezodiac.db");
-				db.Add(animal);
+				var db = new ChiZodiacDb ("chinesezodiac.db");
+				db.Add (animal);
 				// show some kind of confirmation
-				return Redirect ("All");
+				return RedirectToAction ("Details", "Animals", new { name = animal.Name });
 			} else {
 				return View (animal);	
 			}			
+		}
+		
+		[AcceptVerbs(HttpVerbs.Get)]
+		public ActionResult Delete (string name)
+		{
+			// it would be polite and sensible to have a confirmation page first
+			var db = new ChiZodiacDb ("chinesezodiac.db");
+			var animals = from a in db.Animals where a.Name.ToLower () == name.ToLower () select a;
+			foreach (var a in animals) {
+				db.Delete (a);
+			}
+			return Redirect ("All");
 		}
 		
 	}

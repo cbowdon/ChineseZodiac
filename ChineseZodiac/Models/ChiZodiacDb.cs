@@ -50,20 +50,35 @@ namespace ChineseZodiac
 			
 			/// to prevent an injection attack, we parameterize with @name/etc
 			s.CommandText = "INSERT INTO animals (name, position, year) VALUES (@name, @position, @year)";			
-			s.Parameters.AddWithValue("@name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase (animal.Name));
-			s.Parameters.AddWithValue("@position",animal.Position);
-			s.Parameters.AddWithValue("@year", animal.Year);
+			s.Parameters.AddWithValue ("@name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase (animal.Name));
+			s.Parameters.AddWithValue ("@position", animal.Position);
+			s.Parameters.AddWithValue ("@year", animal.Year);
 						
 			s.Connection = conn;			
 			// connect
-			conn.Open();
+			conn.Open ();
 			
 			// execute the command
 			s.ExecuteNonQuery ();
 			
 			// tidy up
-			s.Dispose();
-			conn.Close();
+			s.Dispose ();
+			conn.Close ();
+		}
+		
+		public void Delete (CZAnimal animal)
+		{
+			var s = new SqliteCommand ();
+			s.CommandText = "DELETE FROM animals WHERE name = @name AND position = @position AND year = @year";
+			s.Parameters.AddWithValue ("@name", animal.Name);
+			s.Parameters.AddWithValue ("@position", animal.Position);
+			s.Parameters.AddWithValue ("@year", animal.Year);
+			
+			s.Connection = conn;
+			conn.Open ();
+			s.ExecuteNonQuery ();
+			s.Dispose ();
+			conn.Close ();			
 		}
 		
 		#region Constructor

@@ -1,14 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="ChineseZodiac/Controllers/AnimalsController.cs">
+    <Files>
+      <File FileName="ChineseZodiac/Controllers/AnimalsController.cs" Line="85" Column="27" />
+      <File FileName="ChineseZodiac/Views/Animals/Create.aspx" Line="18" Column="33" />
+      <File FileName="ChineseZodiac/Views/Animals/Index.aspx" Line="14" Column="34" />
+      <File FileName="ChineseZodiac/Views/Animals/Details.aspx" Line="14" Column="40" />
+      <File FileName="ChineseZodiac/Models/ChiZodiacDb.cs" Line="79" Column="18" />
+      <File FileName="ChineseZodiac/Views/Animals/All.aspx" Line="15" Column="48" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="ChineseZodiac" expanded="True">
+          <Node name="ChineseZodiac" expanded="True" selected="True">
             <Node name="Controllers" expanded="True" />
-            <Node name="Models" expanded="True">
-              <Node name="ChiZodiacDb.cs" selected="True" />
-            </Node>
+            <Node name="Models" expanded="True" />
             <Node name="Views" expanded="True">
               <Node name="Animals" expanded="True" />
               <Node name="Home" expanded="True" />
