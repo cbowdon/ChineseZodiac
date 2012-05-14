@@ -3,6 +3,12 @@
 <asp:Content ContentPlaceHolderID="TitleContent" ID="EditTitle" runat="server">
 Edit an animal	
 </asp:Content>
+
+<asp:Content id="HomeSuffix" ContentPlaceHolderID="TitleSuffix" runat="server">
+: Edit	
+</asp:Content>
+
+
 <asp:Content ContentPlaceHolderID="MainContent" ID="EditMain" runat="server">
 <h3>Edit an animal</h3>
 

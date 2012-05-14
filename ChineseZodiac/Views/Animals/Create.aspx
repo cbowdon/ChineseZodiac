@@ -4,6 +4,11 @@
 Create an animal
 </asp:Content>
 
+<asp:Content id="HomeSuffix" ContentPlaceHolderID="TitleSuffix" runat="server">
+: Create	
+</asp:Content>
+
+
 <asp:Content id="CreateText" ContentPlaceHolderID="MainContent" runat="server">
 
 <h3>Create an animal</h3>

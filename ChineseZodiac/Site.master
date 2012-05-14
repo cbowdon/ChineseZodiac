@@ -9,7 +9,7 @@
 	
 <body bgcolor=#998877>
 
-	<h2> Chinese Zodiac </h2>
+	<h2> Chinese Zodiac<asp:ContentPlaceHolder ID="TitleSuffix" runat="server" /></h2>
 
 	<ul>
 		<li> <%= Html.ActionLink("Home", "Index", "Home") %> </li>

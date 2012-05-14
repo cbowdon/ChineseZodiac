@@ -1,24 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ChineseZodiac/Controllers/AnimalsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ChineseZodiac/Views/Animals/Index.aspx">
     <Files>
-      <File FileName="ChineseZodiac/Controllers/AnimalsController.cs" Line="85" Column="27" />
-      <File FileName="ChineseZodiac/Views/Animals/Create.aspx" Line="18" Column="33" />
-      <File FileName="ChineseZodiac/Views/Animals/Index.aspx" Line="14" Column="34" />
-      <File FileName="ChineseZodiac/Views/Animals/Details.aspx" Line="14" Column="40" />
-      <File FileName="ChineseZodiac/Models/ChiZodiacDb.cs" Line="79" Column="18" />
-      <File FileName="ChineseZodiac/Views/Animals/All.aspx" Line="15" Column="48" />
+      <File FileName="ChineseZodiac/Views/Animals/Index.aspx" Line="14" Column="76" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="ChineseZodiac" expanded="True" selected="True">
+          <Node name="ChineseZodiac" expanded="True">
             <Node name="Controllers" expanded="True" />
             <Node name="Models" expanded="True" />
             <Node name="Views" expanded="True">
-              <Node name="Animals" expanded="True" />
+              <Node name="Animals" expanded="True">
+                <Node name="Index.aspx" selected="True" />
+              </Node>
               <Node name="Home" expanded="True" />
             </Node>
+            <Node name="Global.asax" expanded="True" />
           </Node>
         </State>
       </Pad>

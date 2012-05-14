@@ -4,6 +4,10 @@
 About	
 </asp:Content>
 
+<asp:Content id="HomeSuffix" ContentPlaceHolderID="TitleSuffix" runat="server">
+: About	
+</asp:Content>
+
 <asp:Content id="AboutText" ContentPlaceHolderID="MainContent" runat="server">
 <p>		
 	This project is intended to demonstrate/experiment with good practice for building ASP.NET MVC 2 applications.

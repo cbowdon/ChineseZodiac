@@ -40,8 +40,8 @@ namespace ChineseZodiac
 			// find animal in db
 			var an = (from a in db.Animals 
 			          where a.Name.ToLower () == name 
-			          && a.Position == position
-			          && a.Year == year
+				&& a.Position == position
+				&& a.Year == year
 			          select a).Single ();
 			// didn't check for failure... DANGER!
 			return View (an);
@@ -55,6 +55,59 @@ namespace ChineseZodiac
 		{
 			return View ();
 		}
+				
+		private bool ValidInput (CZAnimal animal, bool editingExisting)
+		{
+			// basic sensible input checks
+			if (animal.Name.Trim ().Length == 0) {
+				ModelState.AddModelError ("Name", "Please add a name!");
+			}
+			if (animal.Position.GetType () != typeof(int) ||
+				animal.Position < 1 ||
+				animal.Position > 12) {				
+				ModelState.AddModelError (
+					"Position",
+					"The position should be an integer 0 < x < 13."
+				);
+			}			
+			if (animal.Year.GetType () != typeof(int)) {
+				ModelState.AddModelError ("Year", "The year should be an integer.");
+			}
+			
+			// checking against the database
+			
+			// database matches
+			var db = new ChiZodiacDb ("chinesezodiac.db");
+			var names = db.Animals.Where<CZAnimal> (x => x.Name == animal.Name).ToList ();
+			var positions = db.Animals.Where<CZAnimal> (x => x.Position == animal.Position)
+				.ToList ();
+			var years = db.Animals.Where<CZAnimal> (x => x.Year == animal.Year).ToList ();			
+						
+			if (names.Count > 0 && (!editingExisting || (editingExisting && names [0].Id != animal.Id))) {
+				ModelState.AddModelError (
+					"Name",
+					string.Format ("This animal is already in the database.")
+				);
+			}			
+			if (positions.Count > 0 && (!editingExisting || (editingExisting && positions [0].Id != animal.Id))) {
+				ModelState.AddModelError (
+					"Position",
+					String.Format ("This position already has an animal (the {0}).", positions [0].Name
+				)
+				);
+			}
+			if (years.Count > 0 && (!editingExisting || (editingExisting && years [0].Id != animal.Id))) {
+				ModelState.AddModelError (
+					"Year",
+					String.Format (
+					"This year already has an animal (the {0}).",
+					years [0].Name
+				)
+				);
+			}
+			
+			return ModelState.IsValid;
+		}
 		
 		/// <summary>
 		/// Handle submitted forms
@@ -64,28 +117,16 @@ namespace ChineseZodiac
 		/// </param>
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Create (CZAnimal animal)
-		{
-			/// Here we validate.
-			if (animal.Name.Trim ().Length == 0
-			    // should also check that it's not a duplicate
-			    ) {
-				ModelState.AddModelError ("Name", "Please add a name!");
-			}
-			if (animal.Position.GetType () != typeof(int) ||
-			// should add a check for position-too-high here
-			    animal.Position < 1) {
-				ModelState.AddModelError ("Position", "The position should be a positive integer.");
-			}
-			if (animal.Year.GetType () != typeof(int)) {
-				ModelState.AddModelError ("Year", "The year should be an integer.");
-			}
-						
-			if (ModelState.IsValid) {
-				// call some command on the database
-				var db = new ChiZodiacDb ("chinesezodiac.db");
+		{						
+			if (ValidInput (animal, false)) {
+				var db = new ChiZodiacDb ("chinesezodiac.db");			
 				db.Add (animal);
 				// show some kind of confirmation
-				return RedirectToAction ("Details", "Animals", new { name = animal.Name, position = animal.Position, year = animal.Year });
+				return RedirectToAction (
+					"Details",
+					"Animals", new {
+					name = animal.Name, position = animal.Position, year = animal.Year }
+				);
 			} else {
 				return View (animal);	
 			}			
@@ -116,26 +157,16 @@ namespace ChineseZodiac
 		public ActionResult Edit (CZAnimal animal)
 		{
 			/// Here we validate.
-			if (animal.Name.Trim ().Length == 0
-			    // should also check that it's not a duplicate
-			    ) {
-				ModelState.AddModelError ("Name", "Please add a name!");
-			}
-			if (animal.Position.GetType () != typeof(int) ||
-			// should add a check for position-too-high here
-			    animal.Position < 1) {
-				ModelState.AddModelError ("Position", "The position should be a positive integer.");
-			}
-			if (animal.Year.GetType () != typeof(int)) {
-				ModelState.AddModelError ("Year", "The year should be an integer.");
-			}
-						
-			if (ModelState.IsValid) {
+			if (ValidInput (animal, true)) {
 				// call some command on the database
 				var db = new ChiZodiacDb ("chinesezodiac.db");
 				db.Update (animal);
 				// show some kind of confirmation
-				return RedirectToAction ("Details", "Animals", new { name = animal.Name, position = animal.Position, year = animal.Year });
+				return RedirectToAction (
+					"Details",
+					"Animals", new {
+					name = animal.Name, position = animal.Position, year = animal.Year }
+				);
 			} else {
 				return View (animal);	
 			}					
