@@ -46,6 +46,7 @@
     <Reference Include="Mono.Data.Sqlite" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -60,6 +61,7 @@
     </Compile>
     <Compile Include="Controllers\AnimalsController.cs" />
     <Compile Include="Models\ChiZodiacDb.cs" />
+    <Compile Include="Models\Picture.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -73,9 +75,10 @@
     <Content Include="Views\Animals\Details.aspx" />
     <Content Include="Views\Animals\Create.aspx" />
     <Content Include="Views\Animals\Edit.aspx" />
+    <Content Include="Views\Animals\Picture.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties VerifyCodeBehindFields="true" VerifyCodeBehindEvents="true">

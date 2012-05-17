@@ -35,6 +35,7 @@ Create an animal
 	<%= Html.TextBox ("Year") %>
 	<%= Html.ValidationMessage("Year", "*") %>
 	<br/><br/>
+	
 	<input type="submit" value="Create" />
 	
 <% } %>	

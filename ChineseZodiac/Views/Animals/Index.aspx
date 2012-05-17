@@ -16,5 +16,12 @@ Animals
 <ul>
 	<li> <%= Html.ActionLink("See all the animals", "All", "Animals") %> </li>		
 	<li> <%= Html.ActionLink("Create an animal", "Create", "Animals") %> </li>	
-</ul>	
+</ul>
+
+
+<br/>
+<br/>
+
+<%= Html.ActionLink("Upload a picture", "Picture", "Animals") %>	
+	
 </asp:Content>

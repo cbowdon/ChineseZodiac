@@ -12,10 +12,10 @@ namespace Controllers
 	{
 		public ActionResult Index ()
 		{
-			ViewData ["Message"] = "Welcome to ASP.NET MVC on Mono!";
+			//ViewData ["Message"] = "Welcome to ASP.NET MVC on Mono!";
 			return View ();
 		}
-		
+				
 		public ActionResult About ()
 		{
 			return View ();

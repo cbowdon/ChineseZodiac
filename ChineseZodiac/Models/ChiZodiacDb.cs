@@ -155,7 +155,7 @@ namespace ChineseZodiac
 		public int Position { get; set; }
 		
 		[Column(Storage="Year", Name="year", DbType="int", AutoSync=AutoSync.Never)]
-		public int Year { get; set; }
+		public int Year { get; set; }				
 	}
 	
 	

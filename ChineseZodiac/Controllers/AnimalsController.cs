@@ -172,6 +172,21 @@ namespace ChineseZodiac
 			}					
 		}
 		
+		public ActionResult Picture ()
+		{
+			return View ();
+		}
+		
+		[AcceptVerbs(HttpVerbs.Post)]
+		public ActionResult Upload (ImageModel image)
+		{			
+//			ImageModel temp = image;
+//			Console.WriteLine (temp.ImageName);
+
+			return RedirectToAction("All", "Animals");
+			//return View (image);
+		}
+		
 	}
 }
 

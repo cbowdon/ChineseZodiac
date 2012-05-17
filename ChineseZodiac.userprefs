@@ -1,8 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ChineseZodiac/Views/Animals/Index.aspx">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ChineseZodiac/Views/Animals/Picture.aspx">
     <Files>
-      <File FileName="ChineseZodiac/Views/Animals/Index.aspx" Line="14" Column="76" />
+      <File FileName="ChineseZodiac/Controllers/AnimalsController.cs" Line="182" Column="7" />
+      <File FileName="ChineseZodiac/Views/Animals/Create.aspx" Line="37" Column="12" />
+      <File FileName="ChineseZodiac/Views/Animals/Picture.aspx" Line="22" Column="7" />
+      <File FileName="ChineseZodiac/Models/Picture.cs" Line="13" Column="1" />
+      <File FileName="ChineseZodiac/Views/Animals/Index.aspx" Line="25" Column="65" />
+      <File FileName="ChineseZodiac/Web.config" Line="92" Column="2" />
+      <File FileName="ChineseZodiac/Controllers/HomeController.cs" Line="15" Column="6" />
+      <File FileName="ChineseZodiac/Views/Home/Index.aspx" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +19,7 @@
             <Node name="Models" expanded="True" />
             <Node name="Views" expanded="True">
               <Node name="Animals" expanded="True">
-                <Node name="Index.aspx" selected="True" />
+                <Node name="Picture.aspx" selected="True" />
               </Node>
               <Node name="Home" expanded="True" />
             </Node>
